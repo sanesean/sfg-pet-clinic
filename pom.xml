@@ -40,9 +40,9 @@
         </plugins>
     </build>
     <scm>
-        <connection>scm:git:https://github.com/sanesean/sfg-pet-clinic.git</connection>
-        <url>scm:git:https://github.com/sanesean/sfg-pet-clinic.git</url>
-        <developerConnection>scm:git:https://github.com/sanesean/sfg-pet-clinic.git</developerConnection>
+        <connection>scm:git:git@github.com:sanesean/sfg-pet-clinic.git</connection>
+        <url>scm:git:git@github.com:sanesean/sfg-pet-clinic.git</url>
+        <developerConnection>scm:git:git@github.com:sanesean/sfg-pet-clinic.git</developerConnection>
       <tag>sfg-pet-clinic-0.0.2</tag>
   </scm>
 </project>
