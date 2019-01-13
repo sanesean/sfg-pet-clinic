@@ -1,23 +1,24 @@
 package sanesean.springframework.sfgpetclinic.bootstrap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import sanesean.springframework.sfgpetclinic.model.Owner;
 import sanesean.springframework.sfgpetclinic.model.Vet;
 import sanesean.springframework.sfgpetclinic.services.OwnerService;
 import sanesean.springframework.sfgpetclinic.services.VetService;
-import sanesean.springframework.sfgpetclinic.services.map.OwnerServiceMap;
-import sanesean.springframework.sfgpetclinic.services.map.VetServiceMap;
 
 @Component
 public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    public DataLoader() {
-        this.ownerService = new OwnerServiceMap();
-        this.vetService = new VetServiceMap();
+    @Autowired
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
+
     @Override
     public void run(String... args) throws Exception {
         Owner owner1 = new Owner();
