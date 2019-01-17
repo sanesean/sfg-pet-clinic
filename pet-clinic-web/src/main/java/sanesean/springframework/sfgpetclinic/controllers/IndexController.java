@@ -8,4 +8,10 @@ public class IndexController {
     public String index() {
         return "index.html";
     }
+
+    @RequestMapping("/oops")
+    public String oops() {
+        return "notimplemented";
+    }
+
 }

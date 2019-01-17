@@ -8,6 +8,7 @@ import sanesean.springframework.sfgpetclinic.services.map.OwnerServiceMap;
 
 import java.util.Set;
 
+@RequestMapping("/owners")
 @Controller
 public class OwnerController {
     private final OwnerServiceMap ownerServiceMap;
@@ -16,10 +17,14 @@ public class OwnerController {
         this.ownerServiceMap = ownerServiceMap;
     }
 
-    @RequestMapping("/owners")
+    @RequestMapping("/")
     public String getOwners(Model model) {
         Set<Owner> ownerSets = ownerServiceMap.findAll();
         model.addAttribute("owners", ownerSets);
         return "/owners/index";
+    }
+    @RequestMapping("/find")
+    public String findOwners() {
+        return "notimplemented";
     }
 }
