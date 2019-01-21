@@ -4,22 +4,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sanesean.springframework.sfgpetclinic.model.Owner;
-import sanesean.springframework.sfgpetclinic.services.map.OwnerMapService;
+import sanesean.springframework.sfgpetclinic.services.OwnerService;
 
 import java.util.Set;
 
 @RequestMapping("/owners")
 @Controller
 public class OwnerController {
-    private final OwnerMapService ownerServiceMap;
+    private final OwnerService ownerService;
 
-    public OwnerController(OwnerMapService ownerServiceMap) {
-        this.ownerServiceMap = ownerServiceMap;
+    public OwnerController(OwnerService ownerService) {
+        this.ownerService = ownerService;
     }
 
     @RequestMapping("/")
     public String getOwners(Model model) {
-        Set<Owner> ownerSets = ownerServiceMap.findAll();
+        Set<Owner> ownerSets = ownerService.findAll();
         model.addAttribute("owners", ownerSets);
         return "/owners/index";
     }
