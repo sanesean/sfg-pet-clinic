@@ -31,6 +31,8 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
+      - run: mvn install -DskiTests
+
       - run: gradle dependencies
 
       - save_cache:
@@ -39,4 +41,4 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       # run tests!
-      - run: mvn install
+      - run: mvn integration-test
