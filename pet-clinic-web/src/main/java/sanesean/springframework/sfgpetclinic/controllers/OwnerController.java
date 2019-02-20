@@ -8,7 +8,7 @@ import sanesean.springframework.sfgpetclinic.services.OwnerService;
 
 import java.util.Set;
 
-@RequestMapping("/owners")
+@RequestMapping("owners")
 @Controller
 public class OwnerController {
     private final OwnerService ownerService;
@@ -17,11 +17,11 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping({"", "/index"})
     public String getOwners(Model model) {
         Set<Owner> ownerSets = ownerService.findAll();
         model.addAttribute("owners", ownerSets);
-        return "/owners/index";
+        return "owners/index";
     }
     @RequestMapping("/find")
     public String findOwners() {
