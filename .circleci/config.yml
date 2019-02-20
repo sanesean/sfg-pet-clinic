@@ -1,4 +1,4 @@
-# Java Gradle CircleCI 2.0 configuration file
+# Java Maven CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8u171-jdk
+      - image: circleci/openjdk:8-jdk
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -18,8 +18,7 @@ jobs:
 
     environment:
       # Customize the JVM maximum heap limit
-      JVM_OPTS: -Xmx3200m
-      TERM: dumb
+      MAVEN_OPTS: -Xmx3200m
 
     steps:
       - checkout
@@ -27,18 +26,20 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-{‌{ checksum "pom.xml" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: mvn install -DskiTests
+      # This is necessary to make petclinic-data-XXX.jar "visible" to petclinic-web
+      # From: http://maven.40175.n5.nabble.com/Re-dependency-go-offline-broken-tp5914643p5915059.html
+      - run: mvn install -DskipTests=true
 
-      - run: gradle dependencies
+      - run: mvn dependency:go-offline -DexcludeArtifactIds:petclinic-data
 
       - save_cache:
           paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+            - ~/.m2
+          key: v1-dependencies-{‌{ checksum "pom.xml" }}
 
       # run tests!
       - run: mvn integration-test
