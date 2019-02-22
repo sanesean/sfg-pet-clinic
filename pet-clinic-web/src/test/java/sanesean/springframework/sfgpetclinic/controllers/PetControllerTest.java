@@ -83,7 +83,7 @@ class PetControllerTest {
         when(ownerService.findById(anyLong())).thenReturn(owner);
         when(petTypeService.findAll()).thenReturn(petTypes);
         mockMvc.perform(post("/owners/1/pets/2/edit"))
-                .andExpect(status().is3xxRedirection())
+                .andExpect(status().isOk())
                 .andExpect(view().name("redirect:/owners/1"));
         verify(petService).save(any());
     }
