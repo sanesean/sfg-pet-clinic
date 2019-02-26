@@ -1,6 +1,7 @@
 package sanesean.springframework.sfgpetclinic.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -24,7 +25,6 @@ public class Pet extends BaseEntity {
         if(visits != null || visits.size() > 0) {
             this.visits = visits;
         }
-
     }
 
     @ManyToOne
@@ -36,6 +36,7 @@ public class Pet extends BaseEntity {
     private Owner owner;
 
     @Column(name = "birth_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @Column(name = "name")
